@@ -20,6 +20,7 @@ const app = express();
 //app setting
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
+app.use(express.static(`${__dirname}/src/public`));
 
 //routing
 const home = require("./src/routes/home/index.js");
