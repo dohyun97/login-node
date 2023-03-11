@@ -12,5 +12,22 @@ function login(){
         id: id.value,
         psword: psword.value,
     };
-    console.log(req);
+    
+    fetch("/login",{
+       method: "POST",
+       headers: {
+        "Content-Type": "application/json"
+       },
+       body: JSON.stringify(req),
+    }).then((res) => res.json())
+    .then((res)=> {
+        if(res.success){
+            location.href = "/";
+        }else{
+            alert(res.msg);
+        }
+    }).catch((error)=>{
+        console.error(new Error("Error while in login"));
+    });
 }
+
