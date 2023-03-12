@@ -7,14 +7,15 @@ const id = document.querySelector("#id"),
    registerBtn=document.querySelector("#button");
 
 
-   loginBtn.addEventListener("click",register);
+   registerBtn.addEventListener("click",register);
 
 function register(){
+    if(!id.value) return alert("Please type id");
+    if(psword.value !== confirmPsword.value) return alert("Password is not same");
     const req = {
         id: id.value,
         name: name.value,
         psword: psword.value,
-        confirmPsword: confirmPsword.value,
     };
     
     fetch("/register",{
@@ -26,7 +27,7 @@ function register(){
     }).then((res) => res.json())
     .then((res)=> {
         if(res.success){
-            location.href = "/";
+            location.href = "/login";
         }else{
             alert(res.msg);
         }
