@@ -20,10 +20,15 @@ class User{
         return {success:false,msg:"id not exist"};
     }
 
-    register(){
+    async register(){
+        try{
         const client = this.body;
-        const response = UserStorage.save(client);
+        const response = await UserStorage.save(client);
         return response;
+        }catch(err){
+            const a = {success:false , msg: err};
+            return a;
+        }
     }
 }
 
