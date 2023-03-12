@@ -7,9 +7,10 @@ class User{
         this.body = body;
     }
 
-   async login(){
+    async login(){
         const client = this.body;
-        const {id,psword} = await UserStorage.getUserInfo(client.id);
+        try{
+        const {id, psword} = await UserStorage.getUserInfo(client.id);
         
         if(id){
             if(client.id == id && client.psword == psword){
@@ -18,7 +19,10 @@ class User{
             return {success:false, msg: "pw not exist"};
         }
         return {success:false,msg:"id not exist"};
+    }catch(err){
+      return {success:false,msg:err};
     }
+     }
 
     async register(){
         try{
